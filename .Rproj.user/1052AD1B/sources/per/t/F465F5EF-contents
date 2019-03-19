@@ -1,0 +1,62 @@
+---
+title: "Bayesian Reliability Simulation"
+author: "Miao Cai"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+\[
+\lambda_{rj} = \alpha_{r0}\exp(\alpha_{r1}w_j) 
+
+\]
+
+
+```{r}
+alpha10 = 0.001; alpha11 = 0.05; 
+alpha20 = 0.0001; alpha21 = 0.08
+
+w1 = 45; w2 = 55
+
+t11 = 10; t12 = 20 # w1
+t21 = 30; t22 = 40 #w2
+
+K1 = 10; K2 = 50; K3 = 100
+
+lambda = function(alpha0, alpha1, wj) {
+  return(alpha0*exp(alpha1*wj))
+}
+
+lambda11 = lambda(alpha10, alpha11, w1)
+lambda12 = lambda(alpha10, alpha11, w2)
+lambda21 = lambda(alpha20, alpha21, w1)
+lambda22 = lambda(alpha20, alpha21, w2)
+
+
+```
+
+
+```{r}
+rjeliab = '
+data {
+  int<lower=0> n; //total # of obs
+  real<lower=0> tau;//truncated time
+  vector<lower=0>[n] t; //failure time
+}
+parameters{
+  real<lower=0> beta;
+  real<lower=0> theta;
+}
+model{
+  t ~ nhpp(beta, theta, tau);
+//PRIORS
+  beta ~ gamma(1, 1);
+  theta ~ gamma(1, 1);
+}
+'
+```
+
