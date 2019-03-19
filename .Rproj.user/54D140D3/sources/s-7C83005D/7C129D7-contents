@@ -20,15 +20,15 @@ knitr::opts_chunk$set(echo = TRUE)
 alpha10 = 0.001; alpha11 = 0.05; 
 alpha20 = 0.0001; alpha21 = 0.08
 
-w1 = 45; w2 = 55
+w = c(45, 55)
+t = matrix(seq(10, 40, 10), ncol = 2, byrow = TRUE)
+K = c(10, 50, 100)
 
-t11 = 10; t12 = 20 # w1
-t21 = 30; t22 = 40 #w2
 
-K1 = 10; K2 = 50; K3 = 100
-
-lambda = function(alpha0, alpha1, wj) {
-  return(alpha0*exp(alpha1*wj))
+lambda = function(r = 1:2, j = 1:2) {
+  alpha_r0 = c(alpha10, alpha20)[r]
+  alpha_r1 = c(alpha11, alpha21)[r]
+  return(alpha_r0*exp(alpha_r1*w[j]))
 }
 
 lambda11 = lambda(alpha10, alpha11, w1)
@@ -36,7 +36,19 @@ lambda12 = lambda(alpha10, alpha11, w2)
 lambda21 = lambda(alpha20, alpha21, w1)
 lambda22 = lambda(alpha20, alpha21, w2)
 
+p = function(num, i = 1:2, j = 1:2, ){
+  lam1j = lambda(1, j)
+  lam2j = lambda(2, j)
+  
+  p0 = exp(-(lam1j + lam2j)*t[i, j])
+  p1 = (lam1j/(lam1j + lam2j))(1 - p0)
+  p2 = (lam2j/(lam1j + lam2j))(1 - p0)
+  
+  return(c(p0, p1, p2))
+}
 
+
+rmultinom(100, 10, prob = c(0.8, 0.1, 0.1))
 ```
 
 

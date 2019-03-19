@@ -12,50 +12,55 @@ knitr::opts_chunk$set(echo = TRUE)
 
 \[
 \lambda_{rj} = \alpha_{r0}\exp(\alpha_{r1}w_j) 
-
 \]
 
 
 ```{r}
-alpha10 = 0.001; alpha11 = 0.05; 
-alpha20 = 0.0001; alpha21 = 0.08
+alpha = matrix(c(0.001, 0.05, 0.0001, 0.08), ncol = 2, byrow = TRUE)
+w = c(45, 55)
+t = matrix(seq(10, 40, 10), ncol = 2, byrow = TRUE)
+K = c(10, 50, 100)
 
-w1 = 45; w2 = 55
 
-t11 = 10; t12 = 20 # w1
-t21 = 30; t22 = 40 #w2
-
-K1 = 10; K2 = 50; K3 = 100
-
-lambda = function(alpha0, alpha1, wj) {
-  return(alpha0*exp(alpha1*wj))
+lambda = function(r = 1:2, j = 1:2) {
+  alpha_r0 = alpha[r, 1]
+  alpha_r1 = alpha[r, 2]
+  return(alpha_r0*exp(alpha_r1*w[j]))
 }
 
-lambda11 = lambda(alpha10, alpha11, w1)
-lambda12 = lambda(alpha10, alpha11, w2)
-lambda21 = lambda(alpha20, alpha21, w1)
-lambda22 = lambda(alpha20, alpha21, w2)
+p = function(i = 1:2, j = 1:2){
+  lam1j = lambda(1, j)
+  lam2j = lambda(2, j)
+  
+  p0 = exp(-(lam1j + lam2j)*t[i, j])
+  p1 = (lam1j/(lam1j + lam2j))*(1 - p0)
+  p2 = (lam2j/(lam1j + lam2j))*(1 - p0)
+  
+  return(c(p0, p1, p2))
+}
 
-
+rmultinom(100, K[1], prob = p(1, 1))
 ```
 
 
-```{r}
+```{r eval=FALSE}
 rjeliab = '
 data {
-  int<lower=0> n; //total # of obs
-  real<lower=0> tau;//truncated time
-  vector<lower=0>[n] t; //failure time
+  
 }
 parameters{
-  real<lower=0> beta;
-  real<lower=0> theta;
+  real<lower=0> a10; 
+  real<lower=0> a11;
+  real<lower=0> a20; 
+  real<lower=0> a21;
 }
 model{
   t ~ nhpp(beta, theta, tau);
 //PRIORS
-  beta ~ gamma(1, 1);
-  theta ~ gamma(1, 1);
+  a10 ~ gamma(1, 1);
+  a11 ~ gamma(1, 1);
+  a20 ~ gamma(1, 1);
+  a21 ~ gamma(1, 1);
 }
 '
 ```
