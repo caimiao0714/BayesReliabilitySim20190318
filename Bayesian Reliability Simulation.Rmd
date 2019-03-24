@@ -16,6 +16,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r}
+set.seed(123)
+
 alpha = matrix(c(0.001, 0.05, 0.0001, 0.08), ncol = 2, byrow = TRUE)
 w = c(45, 55)
 t = matrix(seq(10, 40, 10), ncol = 2, byrow = TRUE)
@@ -39,20 +41,144 @@ p = function(i = 1:2, j = 1:2){
   return(c(p0, p1, p2))
 }
 
-rmultinom(100, K[1], prob = p(1, 1))
+Tmatrxi = t(rmultinom(10, K[1], prob = p(1, 1)))
 ```
 
 
 ```{r eval=FALSE}
-rjeliab = '
+reliab = "
 data {
-  
+  int<lower=0> n;
+  int DAT[n, 3];
+  vector[2] W;
+  vector[4] Tim;
 }
 parameters{
-  real<lower=0> a10; 
+  real<lower=0, upper=1> a00; 
+  real<lower=0, upper=1> a01;
+}
+transformed parameters{
+  real<lower=0, upper=1> p0; 
+  real<lower=0, upper=1> p1; 
+  real<lower=0, upper=1> p2;
+  vector<lower=0, upper=1> p[3];
+  
+  p0 = exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]);
+  p1 = (a00*exp(a01*W[1])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - p0);
+  p2 = 1-p0-p1;
+  
+  p = [p0, p1, p2]';
+}
+model{
+  for (i in 1:n){
+    //target += multinomial_lpmf(DAT[i,] | p);
+    DAT[i,] ~ multinomial(p);
+  }
+  a00 ~ gamma(1, 10);
+  a01 ~ gamma(1, 10);
+}
+"
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit <- stan(
+  model_code = reliab, data = stan_dat, init_r = 0.1, init = 0.001, 
+  warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 3)
+```
+
+
+```{r}
+library(rstan)
+rstan_options(auto_write = TRUE)
+
+fit <- stan(
+  model_code = reliab, 
+  data = stan_dat, 
+  warmup = 500, iter = 1000, chains = 1, cores = 1)
+```
+
+
+```{r eval=FALSE}
+reliab1 = '
+data {
+  int<lower=0> n;
+  int DAT[n, 3];
+  vector[2] W;
+  vector[4] Tim;
+}
+parameters{
+  real<lower=0> a00; 
+  real<lower=0> a01;
+}
+model{
+  vector[3] theta;
+  theta[1] = exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]); 
+  theta[2] = (a00*exp(a01*W[1])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1])); 
+  theta[3] = (a00*exp(a01*W[2])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]));
+  for (i in 1:n)
+    target += multinomial_lpmf(DAT[i,] | theta);
+    //DAT[i,] ~ multinomial(p);
+
+  a00 ~ gamma(1, 10);
+  a01 ~ gamma(1, 10);
+}
+'
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit <- stan(
+  model_code = reliab1, data = stan_dat, init_r = 0.1, init = 0.001, 
+  warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 123)
+```
+
+
+
+
+
+```{r eval=FALSE}
+reliab = '
+functions{
+  real reliab_log(vector[12] MN, vector[12] multi_p){
+    real loglikelihood;
+    loglikelihood = sum(MN*log(multi_p));
+    return loglikelihood;
+  }
+  real getp0(real lam1, real lam12, vector[4] T){ 
+    return(exp(-(lam1 + lam2)*T[])); }
+  real getp1(real lam1, real lam12){ return((lam1j/(lam1 + lam2))*(1 - p0)); }
+  real getp2(real lam1, real lam12){ return((lam2j/(lam1 + lam2))*(1 - p0)); }
+}
+data {
+  int<lower=0> n;
+  matrix[n,12] DAT;
+  vector[2] W;
+  Vector[4] T;
+}
+parameters{
+  real<lower=0> a00; 
+  real<lower=0> a01;
+  real<lower=0> a10;
   real<lower=0> a11;
-  real<lower=0> a20; 
-  real<lower=0> a21;
+}
+transformed parameters{
+  real<lower=0> lambda01;
+  real<lower=0> lambda02;
+  real<lower=0> lambda11;
+  real<lower=0> lambda12;
+  lambda01 = a00*exp(a01*W[1]);
+  lambda02 = a00*exp(a01*W[2]);
+  lambda11 = a10*exp(a11*W[1]);
+  lambda12 = a10*exp(a11*W[2]);
+  
+  real
 }
 model{
   t ~ nhpp(beta, theta, tau);
