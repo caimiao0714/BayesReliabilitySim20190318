@@ -1,21 +1,58 @@
 ---
-title: "Bayesian Reliability Simulation"
+title: "元器件生存时间模拟分析"
 author: "Miao Cai"
 date: "`r Sys.Date()`"
-output: pdf_document
+output: 
+  pdf_document:
+    number_sections: true
+bibliography: ref.bib
+csl: chinese.csl
+link-citations: true
+linkcolor: blue
+header-includes:
+  - \usepackage{soulutf8}
+  - \usepackage{color}
+  - \usepackage[UTF8]{ctex}
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
+# 模拟设置
 
-\[
-\lambda_{rj} = \alpha_{r0}\exp(\alpha_{r1}w_j) 
-\]
+\hl{\mbox{根据你写的内容，介绍模拟的背景，风险1和2，温度设置，检测时间以及样本量的设置等}}
 
 
-```{r}
+# 贝叶斯推断
+
+$$P(\theta|D) = \frac{P(\theta)P(D|\theta)}{\int P(\theta)P(D|\theta)}$$
+
+\hl{\mbox{自己根据先前的文献写500字左右的贝叶斯推断的介绍，1面左右。}}
+
+# 马尔科夫链蒙特卡洛模拟
+
+\hl{\mbox{自己根据先前的文献写500字左右的马尔科夫链蒙特卡洛模拟的介绍，1面左右。}}
+
+# 统计软件
+
+本次模拟主要运用统计计算环境`R`（3.5.3版本）软件来实现[@Rruanjian]，其中贝叶斯建模与推断运用R软件包`rstan`（2.18.2版本）来实现[@rstan]。与其他的贝叶斯推断软件`WinBUGS`, `OpenBUGS`以及`JAGS`相比，Stan具有更灵活的因变量分布，更方便的自定义函数，更加活跃的用户群体论坛，以及依托于汉密尔顿马尔科夫链蒙特卡洛模拟的在大数据和多维空间情况下的更加高效和快速的抽样算法[@gelman2015stan]，因此适用于本模拟研究的统计推断。
+
+
+# 先验分布
+
+对于本研究中的参数$\alpha_{10}, \alpha_{11}, \alpha_{20}, \alpha_{21}$，我们对其设置同样的弱信息量的伽马先验分布$GAMMA(1, 10)$。选择此弱先验分布的原因是由我们的研究背景可以知道：
+
+- 参数$\alpha_{10}, \alpha_{11}, \alpha_{20}, \alpha_{21}$均必须为正数，
+- 参数$\alpha_{10}, \alpha_{11}, \alpha_{20}, \alpha_{21}$值均较小。
+
+
+
+# 后验分布
+
+
+
+```{r eval=FALSE}
 set.seed(123)
 
 alpha = matrix(c(0.001, 0.05, 0.0001, 0.08), ncol = 2, byrow = TRUE)
@@ -31,8 +68,8 @@ lambda = function(r = 1:2, j = 1:2) {
 }
 
 p = function(i = 1:2, j = 1:2){
-  lam1j = lambda(1, j)
-  lam2j = lambda(2, j)
+  lam1j = lambda(1, j) # failure due to factor 1
+  lam2j = lambda(2, j) # failure due to factor 2
   
   p0 = exp(-(lam1j + lam2j)*t[i, j])
   p1 = (lam1j/(lam1j + lam2j))*(1 - p0)
@@ -41,7 +78,7 @@ p = function(i = 1:2, j = 1:2){
   return(c(p0, p1, p2))
 }
 
-Tmatrxi = t(rmultinom(10, K[1], prob = p(1, 1)))
+Tmatrxi = t(rmultinom(100, K[3], prob = p(1, 1)))
 ```
 
 
@@ -54,140 +91,138 @@ data {
   vector[4] Tim;
 }
 parameters{
-  real<lower=0, upper=1> a00; 
-  real<lower=0, upper=1> a01;
+  real<lower=0, upper=0.5> a10; 
+  real<lower=0, upper=0.5> a11;
+  real<lower=0, upper=0.5> a20; 
+  real<lower=0, upper=0.5> a21;
 }
 transformed parameters{
   real<lower=0, upper=1> p0; 
   real<lower=0, upper=1> p1; 
   real<lower=0, upper=1> p2;
-  vector<lower=0, upper=1> p[3];
+  vector<lower=0, upper=1>[3] p;
   
-  p0 = exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]);
-  p1 = (a00*exp(a01*W[1])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - p0);
+  p0 = exp(-(a10*exp(a11*W[1]) + a20*exp(a21*W[2]))*Tim[1]);
+  p1 = (a10*exp(a11*W[1]))/(a10*exp(a11*W[1]) + a20*exp(a21*W[2]))*(1 - p0);
   p2 = 1-p0-p1;
-  
   p = [p0, p1, p2]';
 }
 model{
   for (i in 1:n){
     //target += multinomial_lpmf(DAT[i,] | p);
     DAT[i,] ~ multinomial(p);
+    //DAT[i,] ~ multi_log(p0, p1, p2);
   }
-  a00 ~ gamma(1, 10);
-  a01 ~ gamma(1, 10);
-}
-"
-stan_dat = list(
-  n = nrow(Tmatrxi),
-  DAT = Tmatrxi,
-  W = w,
-  Tim = seq(10, 40, 10)
-)
-
-fit <- stan(
-  model_code = reliab, data = stan_dat, init_r = 0.1, init = 0.001, 
-  warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 3)
-```
-
-
-```{r}
-library(rstan)
-rstan_options(auto_write = TRUE)
-
-fit <- stan(
-  model_code = reliab, 
-  data = stan_dat, 
-  warmup = 500, iter = 1000, chains = 1, cores = 1)
-```
-
-
-```{r eval=FALSE}
-reliab1 = '
-data {
-  int<lower=0> n;
-  int DAT[n, 3];
-  vector[2] W;
-  vector[4] Tim;
-}
-parameters{
-  real<lower=0> a00; 
-  real<lower=0> a01;
-}
-model{
-  vector[3] theta;
-  theta[1] = exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]); 
-  theta[2] = (a00*exp(a01*W[1])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1])); 
-  theta[3] = (a00*exp(a01*W[2])/(a00*exp(a01*W[1]) + a00*exp(a01*W[2])))*(1 - exp(-(a00*exp(a01*W[1]) + a00*exp(a01*W[2]))*Tim[1]));
-  for (i in 1:n)
-    target += multinomial_lpmf(DAT[i,] | theta);
-    //DAT[i,] ~ multinomial(p);
-
-  a00 ~ gamma(1, 10);
-  a01 ~ gamma(1, 10);
-}
-'
-stan_dat = list(
-  n = nrow(Tmatrxi),
-  DAT = Tmatrxi,
-  W = w,
-  Tim = seq(10, 40, 10)
-)
-
-fit <- stan(
-  model_code = reliab1, data = stan_dat, init_r = 0.1, init = 0.001, 
-  warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 123)
-```
-
-
-
-
-
-```{r eval=FALSE}
-reliab = '
-functions{
-  real reliab_log(vector[12] MN, vector[12] multi_p){
-    real loglikelihood;
-    loglikelihood = sum(MN*log(multi_p));
-    return loglikelihood;
-  }
-  real getp0(real lam1, real lam12, vector[4] T){ 
-    return(exp(-(lam1 + lam2)*T[])); }
-  real getp1(real lam1, real lam12){ return((lam1j/(lam1 + lam2))*(1 - p0)); }
-  real getp2(real lam1, real lam12){ return((lam2j/(lam1 + lam2))*(1 - p0)); }
-}
-data {
-  int<lower=0> n;
-  matrix[n,12] DAT;
-  vector[2] W;
-  Vector[4] T;
-}
-parameters{
-  real<lower=0> a00; 
-  real<lower=0> a01;
-  real<lower=0> a10;
-  real<lower=0> a11;
-}
-transformed parameters{
-  real<lower=0> lambda01;
-  real<lower=0> lambda02;
-  real<lower=0> lambda11;
-  real<lower=0> lambda12;
-  lambda01 = a00*exp(a01*W[1]);
-  lambda02 = a00*exp(a01*W[2]);
-  lambda11 = a10*exp(a11*W[1]);
-  lambda12 = a10*exp(a11*W[2]);
-  
-  real
-}
-model{
-  t ~ nhpp(beta, theta, tau);
-//PRIORS
   a10 ~ gamma(1, 1);
   a11 ~ gamma(1, 1);
   a20 ~ gamma(1, 1);
   a21 ~ gamma(1, 1);
 }
-'
+"
+
+library(rstan)
+rstan_options(auto_write = TRUE)
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+summary(fit)
+round(summary(fit)$summary[,1], 4)
 ```
 
+```{r eval=FALSE}
+# N = 10
+set.seed(123)
+Tmatrxi = t(rmultinom(10, 10, prob = p(1, 1)))
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit10 <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+# N = 50
+set.seed(123)
+Tmatrxi = t(rmultinom(50, 50, prob = p(1, 1)))
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit50 <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+
+# N = 100
+set.seed(123)
+Tmatrxi = t(rmultinom(100, 100, prob = p(1, 1)))
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit100 <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+
+# N = 500
+set.seed(123)
+Tmatrxi = t(rmultinom(500, 500, prob = p(1, 1)))
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit500 <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+
+
+# N = 1000
+set.seed(123)
+Tmatrxi = t(rmultinom(1000, 1000, prob = p(1, 1)))
+
+stan_dat = list(
+  n = nrow(Tmatrxi),
+  DAT = Tmatrxi,
+  W = w,
+  Tim = seq(10, 40, 10)
+)
+
+fit1000 <- stan(
+  model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
+  warmup = 1000, iter = 2000, chains = 1, cores = 1, seed = 3)
+
+saveRDS(fit10, 'data/fit10.rds')
+saveRDS(fit50, 'data/fit50.rds')
+saveRDS(fit100, 'data/fit100.rds')
+saveRDS(fit500, 'data/fit500.rds')
+saveRDS(fit1000, 'data/fit1000.rds')
+```
+
+# 参考文献{-}
