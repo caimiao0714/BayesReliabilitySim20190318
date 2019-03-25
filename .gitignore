@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+Bayesian_Reliability_Simulation_files/
+Bayesian_Reliability_Simulation_cache/
+.git/
