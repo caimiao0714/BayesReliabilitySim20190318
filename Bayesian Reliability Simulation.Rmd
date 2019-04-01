@@ -228,10 +228,10 @@ model{
     DAT[i,] ~ multinomial(p);
     //DAT[i,] ~ multi_log(p0, p1, p2);
   }
-  a10 ~ gamma(1, 1);
-  a11 ~ gamma(1, 1);
-  a20 ~ gamma(1, 1);
-  a21 ~ gamma(1, 1);
+  a10 ~ gamma(1, 10);
+  a11 ~ gamma(1, 10);
+  a20 ~ gamma(1, 10);
+  a21 ~ gamma(1, 10);
 }
 "
 
@@ -267,7 +267,8 @@ stan_dat = list(
 
 fit10 <- stan(
   model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
-  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3)
+  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3, 
+  control = list(adapt_delta = 0.95, max_treedepth = 15))
 
 # N = 50
 set.seed(123)
@@ -282,7 +283,8 @@ stan_dat = list(
 
 fit50 <- stan(
   model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
-  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3)
+  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3, 
+  control = list(adapt_delta = 0.95, max_treedepth = 15))
 
 
 # N = 100
@@ -298,7 +300,8 @@ stan_dat = list(
 
 fit100 <- stan(
   model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
-  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3)
+  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3, 
+  control = list(adapt_delta = 0.95, max_treedepth = 15))
 
 
 # N = 500
@@ -314,7 +317,8 @@ stan_dat = list(
 
 fit500 <- stan(
   model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
-  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3)
+  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3, 
+  control = list(adapt_delta = 0.95, max_treedepth = 15))
 
 
 
@@ -331,7 +335,8 @@ stan_dat = list(
 
 fit1000 <- stan(
   model_code = reliab, data = stan_dat, #init_r = 0.1, init = 0.001, 
-  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3)
+  warmup = 1000, iter = 2000, chains = 3, cores = 3, seed = 3, 
+  control = list(adapt_delta = 0.95, max_treedepth = 15))
 
 # write out tables
 wtab = function(fit, filename){
