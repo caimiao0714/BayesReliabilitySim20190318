@@ -22,9 +22,10 @@ knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
 ```
 
 
+
 # 定义函数
 
-```{r eval=FALSE}
+```{r eval=FALSE, echo=TRUE}
 set.seed(123)
 
 alpha = matrix(c(0.001, 0.05, 0.0001, 0.08), ncol = 2, byrow = TRUE)
@@ -84,25 +85,25 @@ create_standat = function(N = 10, N_device = 10){
 }
 
 post_result = function(N_sim = 10, N = 10, N_device = 10){
-  tab_result = matrix(rep(NA, 12*N_sim), byrow = TRUE, ncol = 4)
+  tab_result = matrix(rep(NA, 12*N_sim), byrow = TRUE, ncol = 12)
   
   for (i in 1:N_sim) {
     stan_dat = create_standat(N, N_device)
     fit00 <- stan(
       model_code = reliabMAC, data = stan_dat,  
       warmup = 500, iter = 1000, chains = 1, cores = 1, seed = i)
-    tab_result[i,1:4] = summary(fit00)$summary[1:4,1]
-    tab_result[i,1:4] = summary(fit00)$summary[1:4,1]
-    tab_result[i,1:4] = summary(fit00)$summary[1:4,1]
+    tab_result[i,1:4] = summary(fit00)$summary[1:4,"mean"]
+    tab_result[i,5:8] = summary(fit00)$summary[1:4,"n_eff"]
+    tab_result[i,9:12] = summary(fit00)$summary[1:4,"Rhat"]
   }
   
   return(tab_result)
 }
 ```
 
-# Stan代码
+## Stan代码
 
-```{r eval=FALSE}
+```{r eval=FALSE, echo=TRUE}
 library(rstan)
 rstan_options(auto_write = TRUE)
 options(scipen = 99)
@@ -169,28 +170,33 @@ model{
   a21 ~ uniform(0, 0.1);
 }
 "
+stan_dat = create_standat(1, 10)
+fit_example <- stan(
+  model_code = reliabMAC, data = stan_dat,  
+  warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 123)
 ```
 
 # 正式模拟
+
 ## 模拟 A1
 
-```{r repeatsample}
+```{r repeatsample, eval=FALSE, echo=TRUE}
 set.seed(123)
 library(data.table)
 alpha = matrix(c(0.001, 0.05, 0.0001, 0.08), ncol = 2, byrow = TRUE)
 
-A1_10 = post_result(300, 1, 10)
-A1_50 = post_result(300, 1, 50)
-A1_100 = post_result(300, 1, 100)
+A1_10 = post_result(100, 1, 10)
+A1_50 = post_result(100, 1, 50)
+A1_100 = post_result(100, 1, 100)
 
-data.table::fwrite(as.data.frame(A1_10), 'data/N = 10/A1_10.csv')
-data.table::fwrite(as.data.frame(A1_50), 'data/N = 10/A1_50.csv')
-data.table::fwrite(as.data.frame(A1_100), 'data/N = 10/A1_100.csv')
+data.table::fwrite(as.data.frame(A1_10), 'data/20190409serve200/A1_10.csv')
+data.table::fwrite(as.data.frame(A1_50), 'data/20190409serve200/A1_50.csv')
+data.table::fwrite(as.data.frame(A1_100), 'data/20190409serve200A1_100.csv')
 ```
 
 ## 模拟 A2
 
-```{r A2}
+```{r A2, eval=FALSE, echo=TRUE}
 set.seed(123)
 alpha = matrix(c(0.005, 0.05, 0.0005, 0.08), ncol = 2, byrow = TRUE)
 
@@ -205,7 +211,7 @@ data.table::fwrite(as.data.frame(A2_100), 'data/N = 10/A2_100.csv')
 
 ## 模拟 A3
 
-```{r}
+```{r A3, eval=FALSE, echo=TRUE}
 set.seed(123)
 alpha = matrix(c(0.008, 0.05, 0.0008, 0.08), ncol = 2, byrow = TRUE)
 
@@ -220,7 +226,7 @@ data.table::fwrite(as.data.frame(A3_100), 'data/N = 10/A3_100.csv')
 
 # 生成结果报告
 
-```{r}
+```{r report, eval=FALSE, echo=TRUE}
 pacman::p_load(data.table, tidyverse)
 
 
@@ -229,17 +235,17 @@ report_tab = function(dat, alpha){
                  dat[,c(2, 6, 10)],
                  dat[,c(3, 7, 11)],
                  dat[,c(4, 8, 12)]))
-  dat_result[, alpha := c(replicate(100, 'a01'), 
+  dat_result[, alpha_id := c(replicate(100, 'a01'), 
                       replicate(100, 'a11'), 
                       replicate(100, 'a20'), 
                       replicate(100, 'a21'))]
-  dat_result[, true_est := rep(alpha_3, each = 100)]
-  names(dat_result) = c('estimate', 'n_eff', 'Rhat', 'alpha', 'true_est')
+  dat_result[, true_est := rep(alpha, each = 100)]
+  names(dat_result) = c('estimate', 'n_eff', 'Rhat', 'alpha_id', 'true_est')
 
   final_dat = dat_result[,.(Bias = 1/100*sum(abs(estimate - true_est)),
             MSE = 1/100*sum((estimate - true_est)^2),
             n_eff = mean(n_eff),
-            Rhat = mean(Rhat)), by = alpha]
+            Rhat = mean(Rhat)), by = alpha_id]
   
   return(final_dat)
 }
@@ -281,8 +287,8 @@ report_tab(A3_100, c(0.008, 0.05, 0.0008, 0.08)) %>%
   fwrite('data/20190409serve200/reportA3_100.csv')
 ```
 
-# 轨迹图示例
 
+# 轨迹图示例
 
 ```{r trace, eval=FALSE, echo=TRUE}
 require(rstan)
