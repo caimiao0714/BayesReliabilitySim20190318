@@ -3,27 +3,30 @@ title: "元器件生存时间模拟分析-代码"
 author: "Miao Cai"
 date: "`r Sys.Date()`"
 output:
-  word_document: default
   pdf_document:
-    number_sections: yes
+    number_sections: no
+    toc: true
+  word_document: default
 header-includes:
 - \usepackage{soulutf8}
 - \usepackage{color}
 - \usepackage{float}
 - \usepackage[UTF8]{ctex}
 link-citations: yes
+toccolor: blue
 linkcolor: blue
 csl: chinese.csl
 bibliography: ref.bib
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval=FALSE)
+```{r setup1, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE)
 ```
 
+\clearpage
 
-
-# 定义函数
+# 附录: R及Stan代码 {-}
+## 定义函数 {-}
 
 ```{r eval=FALSE, echo=TRUE}
 set.seed(123)
@@ -55,15 +58,10 @@ SimMatrix = function(N = 10, N_device = 10){
   T1 = matrix(rep(-1, 3*N), ncol = 3, byrow = TRUE)
   T2 = T1; T3 = T1; T4 = T1;
   T1 = t(rmultinom(N, N_device, prob = p(1, 1)))
-  for (i in 1:N) {
-    T2[i,] = t(rmultinom(1, T1[i,1], prob = p(1, 2)))
-  }
-  for (i in 1:N) {
-    T3[i,] = t(rmultinom(1, T2[i,1], prob = p(2, 1)))
-  }
-  for (i in 1:N) {
-    T4[i,] = t(rmultinom(1, T3[i,1], prob = p(2, 2)))
-  }
+  T2 = t(rmultinom(N, N_device, prob = p(1, 2)))
+  T3 = t(rmultinom(N, N_device, prob = p(2, 1)))
+  T4 = t(rmultinom(N, N_device, prob = p(2, 2)))
+    
   return(list(T1, T2, T3, T4))
 }
 
@@ -72,6 +70,8 @@ DAT0 = SimMatrix(100, 100)
 
 create_standat = function(N = 10, N_device = 10){
   dat_list = SimMatrix(N, N_device)
+  t[2,1] = t[2,1] - t[1,2] + t[1,2]*lambda(1, 1)/lambda(1, 2)
+  t[2,2] = t[2,2] - t[1,2] + t[1,2]*lambda(2, 1)/lambda(1, 2)
   stan_dat = list(
     n = nrow(dat_list[[1]]),
     DAT1 = dat_list[[1]],
@@ -101,7 +101,9 @@ post_result = function(N_sim = 10, N = 10, N_device = 10){
 }
 ```
 
-## Stan代码
+\clearpage
+
+## Stan代码 {-}
 
 ```{r eval=FALSE, echo=TRUE}
 library(rstan)
@@ -176,9 +178,11 @@ fit_example <- stan(
   warmup = 500, iter = 1000, chains = 1, cores = 1, seed = 123)
 ```
 
-# 正式模拟
+\clearpage
 
-## 模拟 A1
+## 正式模拟 {-}
+
+### 模拟 A1 {-}
 
 ```{r repeatsample, eval=FALSE, echo=TRUE}
 set.seed(123)
@@ -191,40 +195,38 @@ A1_100 = post_result(100, 1, 100)
 
 data.table::fwrite(as.data.frame(A1_10), 'data/20190409serve200/A1_10.csv')
 data.table::fwrite(as.data.frame(A1_50), 'data/20190409serve200/A1_50.csv')
-data.table::fwrite(as.data.frame(A1_100), 'data/20190409serve200A1_100.csv')
-```
+data.table::fwrite(as.data.frame(A1_100), 'data/20190409serve200/A1_100.csv')
+
 
 ## 模拟 A2
-
-```{r A2, eval=FALSE, echo=TRUE}
 set.seed(123)
 alpha = matrix(c(0.005, 0.05, 0.0005, 0.08), ncol = 2, byrow = TRUE)
 
-A2_10 = post_result(100, 10, 10)
-A2_50 = post_result(100, 10, 50)
-A2_100 = post_result(100, 10, 100)
+A2_10 = post_result(100, 1, 10)
+A2_50 = post_result(100, 1, 50)
+A2_100 = post_result(100, 1, 100)
 
-data.table::fwrite(as.data.frame(A2_10), 'data/N = 10/A2_10.csv')
-data.table::fwrite(as.data.frame(A2_50), 'data/N = 10/A2_50.csv')
-data.table::fwrite(as.data.frame(A2_100), 'data/N = 10/A2_100.csv')
-```
+data.table::fwrite(as.data.frame(A2_10), 'data/20190409serve200/A2_10.csv')
+data.table::fwrite(as.data.frame(A2_50), 'data/20190409serve200/A2_50.csv')
+data.table::fwrite(as.data.frame(A2_100), 'data/20190409serve200/A2_100.csv')
+
 
 ## 模拟 A3
-
-```{r A3, eval=FALSE, echo=TRUE}
 set.seed(123)
 alpha = matrix(c(0.008, 0.05, 0.0008, 0.08), ncol = 2, byrow = TRUE)
 
-A3_10 = post_result(100, 10, 10)
-A3_50 = post_result(100, 10, 50)
-A3_100 = post_result(100, 10, 100)
+A3_10 = post_result(100, 1, 10)
+A3_50 = post_result(100, 1, 50)
+A3_100 = post_result(100, 1, 100)
 
-data.table::fwrite(as.data.frame(A3_10), 'data/N = 10/A3_10.csv')
-data.table::fwrite(as.data.frame(A3_50), 'data/N = 10/A3_50.csv')
-data.table::fwrite(as.data.frame(A3_100), 'data/N = 10/A3_100.csv')
+data.table::fwrite(as.data.frame(A3_10), 'data/20190409serve200/A3_10.csv')
+data.table::fwrite(as.data.frame(A3_50), 'data/20190409serve200/A3_50.csv')
+data.table::fwrite(as.data.frame(A3_100), 'data/20190409serve200/A3_100.csv')
 ```
 
-# 生成结果报告
+\clearpage
+
+## 生成结果报告 {-}
 
 ```{r report, eval=FALSE, echo=TRUE}
 pacman::p_load(data.table, tidyverse)
@@ -255,11 +257,14 @@ A1_10 = fread("data/20190409serve200/A1_10.csv")
 A1_50 = fread("data/20190409serve200/A1_50.csv")
 A1_100 = fread("data/20190409serve200/A1_100.csv")
 
-report_tab(A1_10, c(0.001, 0.05, 0.0001, 0.08)) %>%
+A1_10 %>% as.data.frame() %>%
+  report_tab(c(0.001, 0.05, 0.0001, 0.08)) %>%
   fwrite('data/20190409serve200/reportA1_10.csv')
-report_tab(A1_50, c(0.001, 0.05, 0.0001, 0.08)) %>% 
+A1_50 %>% as.data.frame() %>%
+  report_tab(c(0.001, 0.05, 0.0001, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA1_50.csv')
-report_tab(A1_100, c(0.001, 0.05, 0.0001, 0.08)) %>% 
+A1_100 %>% as.data.frame() %>%
+  report_tab(c(0.001, 0.05, 0.0001, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA1_100.csv')
 
 # A2
@@ -267,11 +272,14 @@ A2_10 = fread("data/20190409serve200/A2_10.csv")
 A2_50 = fread("data/20190409serve200/A2_50.csv")
 A2_100 = fread("data/20190409serve200/A2_100.csv")
 
-report_tab(A2_10, c(0.005, 0.05, 0.0005, 0.08)) %>%
+A2_10 %>% as.data.frame() %>% 
+  report_tab(c(0.005, 0.05, 0.0005, 0.08)) %>%
   fwrite('data/20190409serve200/reportA2_10.csv')
-report_tab(A2_50, c(0.005, 0.05, 0.0005, 0.08)) %>% 
+A2_50 %>% as.data.frame() %>% 
+  report_tab(c(0.005, 0.05, 0.0005, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA2_50.csv')
-report_tab(A2_100, c(0.005, 0.05, 0.0005, 0.08)) %>% 
+A2_100 %>% as.data.frame() %>% 
+  report_tab(c(0.005, 0.05, 0.0005, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA2_100.csv')
 
 # A3
@@ -279,16 +287,20 @@ A3_10 = fread("data/20190409serve200/A3_10.csv")
 A3_50 = fread("data/20190409serve200/A3_50.csv")
 A3_100 = fread("data/20190409serve200/A3_100.csv")
 
-report_tab(A3_10, c(0.008, 0.05, 0.0008, 0.08)) %>%
+A3_10 %>% as.data.frame() %>%
+  report_tab(c(0.008, 0.05, 0.0008, 0.08)) %>%
   fwrite('data/20190409serve200/reportA3_10.csv')
-report_tab(A3_50, c(0.008, 0.05, 0.0008, 0.08)) %>% 
+A3_50%>% as.data.frame() %>%
+  report_tab(c(0.008, 0.05, 0.0008, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA3_50.csv')
-report_tab(A3_100, c(0.008, 0.05, 0.0008, 0.08)) %>% 
+A3_100 %>% as.data.frame() %>%
+  report_tab(c(0.008, 0.05, 0.0008, 0.08)) %>% 
   fwrite('data/20190409serve200/reportA3_100.csv')
 ```
 
+\clearpage
 
-# 轨迹图示例
+## 轨迹图示例 {-}
 
 ```{r trace, eval=FALSE, echo=TRUE}
 require(rstan)

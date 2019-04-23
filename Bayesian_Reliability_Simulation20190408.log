@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.10.17)  9 APR 2019 23:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2018.10.17)  23 APR 2019 16:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1340,35 +1340,35 @@ LaTeX Font Info:    Try loading font information for C70+rm on input line 153.
 (c:/texlive/2018/texmf-dist/tex/latex/ctex/fd/c70rm.fd
 File: c70rm.fd 2018/05/01 v2.4.14 Chinese font definition (CTEX)
 ) (./Bayesian_Reliability_Simulation20190408.toc
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 8.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 8.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 8.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 8.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.53937> on input line 8.
+(Font)              <10.53937> on input line 9.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 8.
+(Font)              <7> on input line 9.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 8.
-LaTeX Font Info:    Try loading font information for U+msa on input line 8.
+(Font)              <5> on input line 9.
+LaTeX Font Info:    Try loading font information for U+msa on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/texlive/2018/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 8.
+LaTeX Font Info:    Try loading font information for U+msb on input line 9.
 (c:/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/texlive/2018/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -1382,103 +1382,115 @@ File: zhwindowsfonts.tex 2018/05/01 v2.4.14 Windows font map loader for pdfTeX
 and DVIPDFMx (CTEX)
 ) [1
 
+] (./Bayesian_Reliability_Simulation20190408.lof)
+\tf@lof=\write6
+\openout6 = `Bayesian_Reliability_Simulation20190408.lof'.
+
+(./Bayesian_Reliability_Simulation20190408.lot)
+\tf@lot=\write7
+\openout7 = `Bayesian_Reliability_Simulation20190408.lot'.
+
+[2
+
 ]
 Package CJKpunct Info: use punctuation spaces for family 'rm' with punctstyle (
-quanjiao) on input line 165.
-LaTeX Font Info:    Try loading font information for TS1+lmr on input line 187.
+quanjiao) on input line 169.
+LaTeX Font Info:    Try loading font information for TS1+lmr on input line 191.
 
 (c:/texlive/2018/texmf-dist/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 197.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 201.
 
 (c:/texlive/2018/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [2]
+) [3
+
+]
 <Bayesian_Reliability_Simulation20190408_files/figure-latex/unnamed-chunk-1-1.p
-df, id=243, 469.755pt x 325.215pt>
+df, id=305, 469.755pt x 325.215pt>
 File: Bayesian_Reliability_Simulation20190408_files/figure-latex/unnamed-chunk-
 1-1.pdf Graphic file (type pdf)
 <use Bayesian_Reliability_Simulation20190408_files/figure-latex/unnamed-chunk-1
 -1.pdf>
 Package pdftex.def Info: Bayesian_Reliability_Simulation20190408_files/figure-l
-atex/unnamed-chunk-1-1.pdf  used on input line 223.
+atex/unnamed-chunk-1-1.pdf  used on input line 227.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 223--223
+Underfull \hbox (badness 10000) in paragraph at lines 227--227
 [][]
  []
 
-[3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
+[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.250 
+l.254 
        <./Bayesian_Reliability_Simulation20190408_files/figure-latex/unnamed-ch
-unk-1-1.pdf>] [4pdfTeX warning (ext4): destination with the same identifier (na
+unk-1-1.pdf>] [5pdfTeX warning (ext4): destination with the same identifier (na
 me{table.1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.310 
+l.314 
       pdfTeX warning (ext4): destination with the same identifier (name{table.2
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.310 
+l.314 
       pdfTeX warning (ext4): destination with the same identifier (name{table.3
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.310 
+l.314 
       ]
-Overfull \hbox (27.13959pt too wide) in paragraph at lines 331--332
+Overfull \hbox (27.13959pt too wide) in paragraph at lines 335--336
 [][][] 
  []
 
-[5pdfTeX warning (ext4): destination with the same identifier (name{table.4}) h
+[6pdfTeX warning (ext4): destination with the same identifier (name{table.4}) h
 as been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.349 
+l.353 
       pdfTeX warning (ext4): destination with the same identifier (name{table.5
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.349 
+l.353 
       ]
 <Bayesian_Reliability_Simulation20190408_files/figure-latex/traceplotinclude-1.
-pdf, id=282, 469.755pt x 325.215pt>
+pdf, id=338, 469.755pt x 325.215pt>
 File: Bayesian_Reliability_Simulation20190408_files/figure-latex/traceplotinclu
 de-1.pdf Graphic file (type pdf)
 <use Bayesian_Reliability_Simulation20190408_files/figure-latex/traceplotinclud
 e-1.pdf>
 Package pdftex.def Info: Bayesian_Reliability_Simulation20190408_files/figure-l
-atex/traceplotinclude-1.pdf  used on input line 358.
+atex/traceplotinclude-1.pdf  used on input line 362.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 358--358
+Underfull \hbox (badness 10000) in paragraph at lines 362--362
 [][]
  []
 
-[6pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
+[7pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.361 \newpage
-               <./Bayesian_Reliability_Simulation20190408_files/figure-latex/tr
-aceplotinclude-1.pdf>]
+l.365 \clearpage
+                 <./Bayesian_Reliability_Simulation20190408_files/figure-latex/
+traceplotinclude-1.pdf>]
 
-Package xcolor Warning: Incompatible color definition on input line 374.
+Package xcolor Warning: Incompatible color definition on input line 377.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.53937> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 376.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 379.
 
 Package xcolor Warning: Incompatible color definition on input line 450.
 
@@ -1486,214 +1498,201 @@ Package xcolor Warning: Incompatible color definition on input line 450.
 Package xcolor Warning: Incompatible color definition on input line 450.
 
 
-Underfull \vbox (badness 10000) detected at line 450
- []
-
-
 Package xcolor Warning: Incompatible color definition on input line 450.
 
-[7]
+[8
 
-Package xcolor Warning: Incompatible color definition on input line 450.
 
+]
 
 Package xcolor Warning: Incompatible color definition on input line 450.
 
 
-Package xcolor Warning: Incompatible color definition on input line 460.
+Package xcolor Warning: Incompatible color definition on input line 450.
 
-[8]
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 503
+[9]
+
+Package xcolor Warning: Incompatible color definition on input line 458.
+
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 501
 .
 (c:/texlive/2018/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-Package xcolor Warning: Incompatible color definition on input line 529.
+Package xcolor Warning: Incompatible color definition on input line 531.
 
 
-Package xcolor Warning: Incompatible color definition on input line 529.
+Package xcolor Warning: Incompatible color definition on input line 531.
 
 
-Underfull \vbox (badness 10000) detected at line 529
- []
+Package xcolor Warning: Incompatible color definition on input line 531.
+
+[10
+
+]
+
+Package xcolor Warning: Incompatible color definition on input line 531.
 
 
-Underfull \vbox (badness 10000) detected at line 529
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 529.
-
-[9]
-
-Package xcolor Warning: Incompatible color definition on input line 529.
-
-
-Package xcolor Warning: Incompatible color definition on input line 529.
-
-
-Package xcolor Warning: Incompatible color definition on input line 545.
-
-
-Package xcolor Warning: Incompatible color definition on input line 559.
-
-
-Package xcolor Warning: Incompatible color definition on input line 559.
-
-
-Package xcolor Warning: Incompatible color definition on input line 559.
-
-[10]
-
-Package xcolor Warning: Incompatible color definition on input line 559.
-
-
-Package xcolor Warning: Incompatible color definition on input line 559.
-
-
-Package xcolor Warning: Incompatible color definition on input line 567.
-
-
-Package xcolor Warning: Incompatible color definition on input line 580.
-
-
-Package xcolor Warning: Incompatible color definition on input line 580.
-
-
-Package xcolor Warning: Incompatible color definition on input line 588.
-
-
-Package xcolor Warning: Incompatible color definition on input line 601.
-
-
-Package xcolor Warning: Incompatible color definition on input line 601.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 672.
-
-
-Package xcolor Warning: Incompatible color definition on input line 672.
-
-
-Package xcolor Warning: Incompatible color definition on input line 672.
+Package xcolor Warning: Incompatible color definition on input line 531.
 
 [11]
 
-Package xcolor Warning: Incompatible color definition on input line 672.
+Package xcolor Warning: Incompatible color definition on input line 543.
+
+LaTeX Font Info:    Try loading font information for C70+zhfs on input line 558
+.
+(c:/texlive/2018/texmf-dist/tex/latex/zhmetrics/c70zhfs.fd
+File: c70zhfs.fd 2009/09/23 4.8.2
+)
+
+Package xcolor Warning: Incompatible color definition on input line 583.
 
 
-Package xcolor Warning: Incompatible color definition on input line 672.
+Package xcolor Warning: Incompatible color definition on input line 583.
 
 
-Underfull \vbox (badness 10000) detected at line 672
+Underfull \vbox (badness 10000) detected at line 583
  []
 
 
-Underfull \vbox (badness 10000) detected at line 672
- []
+Package xcolor Warning: Incompatible color definition on input line 583.
+
+[12
+
+]
+
+Package xcolor Warning: Incompatible color definition on input line 583.
 
 
-Package xcolor Warning: Incompatible color definition on input line 672.
-
-[12]
-
-Package xcolor Warning: Incompatible color definition on input line 672.
-
-
-Package xcolor Warning: Incompatible color definition on input line 672.
-
-
-Package xcolor Warning: Incompatible color definition on input line 682.
-
-
-Package xcolor Warning: Incompatible color definition on input line 698.
-
-
-Package xcolor Warning: Incompatible color definition on input line 698.
+Package xcolor Warning: Incompatible color definition on input line 583.
 
 [13]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 717.
-[14]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 717.
+
+Package xcolor Warning: Incompatible color definition on input line 591.
+
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+[14
+
+]
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+
+Package xcolor Warning: Incompatible color definition on input line 661.
+
+[15]
+
+Package xcolor Warning: Incompatible color definition on input line 669.
+
+
+Package xcolor Warning: Incompatible color definition on input line 722.
+
+
+Package xcolor Warning: Incompatible color definition on input line 722.
+
+
+Package xcolor Warning: Incompatible color definition on input line 722.
+
+[16
+
+]
+
+Package xcolor Warning: Incompatible color definition on input line 722.
+
+
+Package xcolor Warning: Incompatible color definition on input line 722.
+
+[17]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 741.
+[18
+
+]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 741.
 (./Bayesian_Reliability_Simulation20190408.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 717.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 717.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 741.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 741.
 Package rerunfilecheck Info: File `Bayesian_Reliability_Simulation20190408.out'
  has not changed.
-(rerunfilecheck)             Checksum: F3B68D1E53E1F6F5EDAC37B9011274C0;901.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 717.
+(rerunfilecheck)             Checksum: 890E345DF1DD4DC652C041F55E147093;1718.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 741.
  ) 
 Here is how much of TeX's memory you used:
- 28466 strings out of 492639
- 474447 string characters out of 6133087
- 581302 words of memory out of 5000000
- 31607 multiletter control sequences out of 15000+600000
- 624400 words of font info for 209 fonts, out of 8000000 for 9000
+ 28568 strings out of 492639
+ 476305 string characters out of 6133087
+ 579143 words of memory out of 5000000
+ 31672 multiletter control sequences out of 15000+600000
+ 623647 words of font info for 221 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 41i,9n,63p,1160b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
-<c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf>{c:/texlive/2018/te
-xmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Windows/Fonts/simkai.ttf><c:/Windows/
-Fonts/simkai.ttf>{c:/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}<c:/
-Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.
-ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts
-/simsun.ttc>{c:/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/te
-xlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}<c:/Windows/Fonts/simsun
-.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc>{c:/texlive/2018
-/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}<c:/Windows/Fonts/simsun.ttc><c:/Windo
+ 41i,9n,63p,1160b,394s stack positions out of 5000i,500n,10000p,200000b,80000s
+<c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/s
+imfang.ttf><c:/Windows/Fonts/simfang.ttf>{c:/texlive/2018/texmf-dist/fonts/enc/
+dvips/lm/lm-ts1.enc}{c:/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c
+:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHe
+i.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/simsun.ttc>{c:/texlive/201
+8/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{c:/texlive/2018/texmf-dist/fonts
+/enc/dvips/lm/lm-mathit.enc}<c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/sims
+un.ttc><c:/Windows/Fonts/simsun.ttc>{c:/texlive/2018/texmf-dist/fonts/enc/dvips
+/lm/lm-rm.enc}<c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Win
+dows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc
+><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/si
+msun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/
+Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/
+Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.
+ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts
+/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windo
 ws/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><
-c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/sims
-un.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fo
-nts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Wi
-ndows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.tt
-c><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/s
-imsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows
+c:/Windows/Fonts/simsun.ttc>{c:/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-m
+athex.enc}<c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows
 /Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:
 /Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun
 .ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Font
-s/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc>{c:/texl
-ive/2018/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}<c:/Windows/Fonts/simsun.t
+s/simsun.ttc><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Wind
+ows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/SimHei.ttf>
+<c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/sim
+sun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/F
+onts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/SimHei.ttf><c:/W
+indows/Fonts/SimHei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.t
 tc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/
-simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Window
-s/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c
-:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsu
-n.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fon
-ts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Win
-dows/Fonts/simsun.ttc><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf
-><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/si
-msun.ttc><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/
+simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/SimHei.ttf><c:/Window
+s/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c
+:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHe
+i.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fon
+ts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Win
+dows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf
+><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/Si
+mHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/
 Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/
 Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.
-ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts
-/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windo
-ws/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><
-c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimH
-ei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fo
-nts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Wi
-ndows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/SimHei.tt
-f><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/s
-imsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows
-/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:
-/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun
-.ttc><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/texlive/2
-018/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/texlive/2018/texmf-dist/fon
-ts/type1/public/lm/lmex10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm
-/lmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><c:/tex
-live/2018/texmf-dist/fonts/type1/public/lm/lmr10.pfb><c:/texlive/2018/texmf-dis
-t/fonts/type1/public/lm/lmr7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public
-/lm/lmri10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:
-/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/texlive/2018/texm
-f-dist/fonts/type1/public/lm/lmsy7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/
-public/lm/lmtk10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtt10.p
-fb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtti10.pfb>
-Output written on Bayesian_Reliability_Simulation20190408.pdf (14 pages, 859080
+ttf><c:/Windows/Fonts/SimHei.ttf><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts
+/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windo
+ws/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><
+c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/simsun.ttc><c:/Windows/Fonts/sims
+un.ttc><c:/Windows/Fonts/simsun.ttc><c:/texlive/2018/texmf-dist/fonts/type1/pub
+lic/lm/lmbx10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmbx12.pfb>
+<c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmex10.pfb><c:/texlive/2018/t
+exmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/texlive/2018/texmf-dist/fonts/ty
+pe1/public/lm/lmmi7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr10
+.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/texlive/201
+8/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/texlive/2018/texmf-dist/fonts
+/type1/public/lm/lmsy10.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/l
+msy7.pfb><c:/texlive/2018/texmf-dist/fonts/type1/public/lm/lmtk10.pfb><c:/texli
+ve/2018/texmf-dist/fonts/type1/public/lm/lmtt10.pfb><c:/texlive/2018/texmf-dist
+/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Bayesian_Reliability_Simulation20190408.pdf (18 pages, 858045
  bytes).
 PDF statistics:
- 740 PDF objects out of 1000 (max. 8388607)
- 530 compressed objects within 6 object streams
- 58 named destinations out of 1000 (max. 500000)
- 351 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 806 PDF objects out of 1000 (max. 8388607)
+ 592 compressed objects within 6 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 415 words of extra memory for PDF output out of 10000 (max. 10000000)
 
